@@ -5,7 +5,7 @@ class baseData{
     public function conexion() {
         try{
             $dbuser = 'root'; 
-            $dbpass = 'ciro29092023';
+            $dbpass = '';
 
             $pdo = new PDO('mysql:host=localhost;dbname=100', $dbuser, $dbpass);
             $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);

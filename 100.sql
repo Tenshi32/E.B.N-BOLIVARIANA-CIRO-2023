@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.5
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 23-09-2023 a las 15:21:35
--- Versión del servidor: 10.1.38-MariaDB
--- Versión de PHP: 7.3.2
+-- Tiempo de generación: 06-05-2024 a las 02:57:58
+-- Versión del servidor: 10.4.32-MariaDB
+-- Versión de PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -19,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `1`
+-- Base de datos: `100`
 --
 
 -- --------------------------------------------------------
@@ -39,7 +38,6 @@ CREATE TABLE `alumno` (
   `lugar_nac_a` varchar(2000) NOT NULL,
   `fecha_insc_a` date NOT NULL,
   `direccion_a` varchar(200) NOT NULL,
-  `periodo_escolar_a` varchar(20) NOT NULL,
   `id_estado_a` int(100) NOT NULL,
   `id_ciudad_a` int(100) NOT NULL,
   `id_municipio_a` int(100) NOT NULL,
@@ -48,19 +46,15 @@ CREATE TABLE `alumno` (
   `id_grado_a` int(11) NOT NULL,
   `id_seccion_a` int(11) NOT NULL,
   `tiene_a` enum('si','no') NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `alumno`
 --
 
-INSERT INTO `alumno` (`id_a`, `nombre_a`, `apellido_a`, `cedula_a`, `cedula_escolar_a`, `genero_a`, `fecha_nac_a`, `lugar_nac_a`, `fecha_insc_a`, `direccion_a`, `periodo_escolar_a`, `id_estado_a`, `id_ciudad_a`, `id_municipio_a`, `id_parroquia_a`, `activo_a`, `id_grado_a`, `id_seccion_a`, `tiene_a`) VALUES
-(12384512635, 'Victor', 'Carrillo', '(vacio)', 12384512635, 'M', '2009-02-19', 'gasdgasdfwergfdgbvxcvb', '2023-09-16', 'sdfasdfasdfasdfasdf', '2023-2024', 3, 43, 31, 91, 'si', 6, 1, 'no'),
-(12523580033, 'Angel ', 'Leon', '29772294', 12523580033, 'M', '2003-02-19', 'asfasdkfalsdkjfalsdfaljksgfljkasdfljkasdfjkadsljkhaldsjkfhaljksdhflajkfhasldfhlaksjdfhawhucaildwfv', '2023-09-16', 'opfgsñadaliñsi´ñifñsdihñi', '2023-2024', 4, 64, 44, 131, 'si', 4, 2, 'si'),
-(27536109033, 'Angel', 'Leon', '29772294', 27536109033, 'M', '2003-02-19', 'asfasdkfalsdkjfalsdfaljksgfljkasdfljkasdfjkadsljkhaldsjkfhaljksdhflajkfhasldfhlaksjdfhawhucaildwfv', '2023-09-16', 'opfgsñadaliñsi´ñifñsdihñi', '2023-2024', 4, 64, 44, 131, 'si', 5, 4, 'si'),
-(45234523452, 'fasfasdfasd', 'fasfasdf', '(vacio)', 45234523452, 'M', '2013-07-06', 'faskldfasdhfashdflkajsdhfljkasdh', '2023-09-21', 'fjfafhlajhdflasj', '2023-2024', 2, 6, 10, 331, 'si', 5, 2, 'no'),
-(45923784567, 'dgfaskjdfg', 'fasdfsdhfgakgf', '(vacio)', 45923784567, 'M', '2008-09-01', 'sldhfklasdgflasjkdfgasdfkj', '2023-09-20', 'fafasdfasdfasdfasd34534trerwqr', '2023-2024', 4, 56, 37, 115, 'si', 5, 2, 'no'),
-(70568908723, 'sdfasdfasdfasdfasdfasdf', 'Carrillo', '(vacio)', 70568908723, 'M', '2015-01-05', 'dfhlkjlasdkfjhlasdfjk', '2023-09-21', 'fafasdfasdfasdfasd34534trerwqr', '2023-2024', 2, 5, 10, 332, 'si', 4, 2, 'no');
+INSERT INTO `alumno` (`id_a`, `nombre_a`, `apellido_a`, `cedula_a`, `cedula_escolar_a`, `genero_a`, `fecha_nac_a`, `lugar_nac_a`, `fecha_insc_a`, `direccion_a`, `id_estado_a`, `id_ciudad_a`, `id_municipio_a`, `id_parroquia_a`, `activo_a`, `id_grado_a`, `id_seccion_a`, `tiene_a`) VALUES
+(125235802, 'Mario Robert', 'Ruiz Mendez', '', 125235802, 'M', '2016-01-12', 'Maracay, Hospital Milittar', '2024-01-02', 'Caña de Azucar S8', 4, 64, 44, 131, 'si', 7, 5, 'no'),
+(134556451, 'Jose Ronald', 'Martinez Segura', '30568741', 134556451, 'M', '2017-03-01', 'Aragua, Maracay Hospital Militar', '2023-04-03', 'El Limon', 4, 64, 44, 130, 'si', 1, 1, 'si');
 
 -- --------------------------------------------------------
 
@@ -72,21 +66,19 @@ CREATE TABLE `auditoria` (
   `id` int(11) NOT NULL,
   `id_usuario` int(100) NOT NULL,
   `nivel` enum('A','I') NOT NULL,
-  `entrada` datetime NOT NULL,
-  `acciones` varchar(20000) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
-  `salida` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `fecha` varchar(50) NOT NULL,
+  `entrada` time NOT NULL,
+  `acciones` mediumtext CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `salida` time NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Volcado de datos para la tabla `auditoria`
 --
 
-INSERT INTO `auditoria` (`id`, `id_usuario`, `nivel`, `entrada`, `acciones`, `salida`) VALUES
-(65, 24, 'A', '2023-09-22 11:49:08', 'Ninguna Accion Realizada.', '2023-09-22 11:49:13'),
-(66, 24, 'A', '2023-09-22 11:49:16', 'Realizo Actualizacion a los datos del profesor(a)  de la cedula V-,', '2023-09-22 14:55:31'),
-(67, 24, 'A', '2023-09-22 14:55:35', 'Realizo Actualizacion a los datos del profesor(a)  de la cedula V-,', '2023-09-22 14:58:25'),
-(68, 24, 'A', '2023-09-22 14:58:28', '0Realizo Actualizacion a los datos del profesor(a)  de la cedula V-,', '2023-09-22 16:10:51'),
-(69, 24, 'A', '2023-09-22 16:10:54', 'Realizo el registro del profesor(a) josef de la cedula V-543453425,Realizo el registro del profesor(a) angel de la cedula V-346912837,Se Elimino el profesor(a) angel de la cedula V-346912837 del sistema,Se Elimino el profesor(a) kahdgfkaj de la cedula V-578346512 del sistema,', '2023-09-22 16:18:01');
+INSERT INTO `auditoria` (`id`, `id_usuario`, `nivel`, `fecha`, `entrada`, `acciones`, `salida`) VALUES
+(137, 24, 'A', '14/03/2024', '03:03:33', 'Ninguna Accion Realizada.', '03:03:06'),
+(138, 24, 'A', '18/03/2024', '17:03:28', 'Ninguna Accion Realizada.', '17:03:53');
 
 -- --------------------------------------------------------
 
@@ -99,7 +91,7 @@ CREATE TABLE `ciudades` (
   `id_estado` int(11) NOT NULL,
   `ciudad` varchar(200) NOT NULL,
   `capital` enum('S','N') NOT NULL DEFAULT 'N'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Volcado de datos para la tabla `ciudades`
@@ -608,6 +600,52 @@ INSERT INTO `ciudades` (`id_ciudad`, `id_estado`, `ciudad`, `capital`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `dia`
+--
+
+CREATE TABLE `dia` (
+  `id_dia` int(11) NOT NULL,
+  `dia` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- Volcado de datos para la tabla `dia`
+--
+
+INSERT INTO `dia` (`id_dia`, `dia`) VALUES
+(1, 'Lunes'),
+(2, 'Martes'),
+(3, 'Miercoles'),
+(4, 'Jueves'),
+(5, 'Viernes');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `directora`
+--
+
+CREATE TABLE `directora` (
+  `id` int(11) NOT NULL,
+  `id_users` int(11) NOT NULL,
+  `nombre1` varchar(100) NOT NULL,
+  `nombre2` varchar(100) NOT NULL,
+  `apellido1` varchar(100) NOT NULL,
+  `apellido2` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `directora`
+--
+
+INSERT INTO `directora` (`id`, `id_users`, `nombre1`, `nombre2`, `apellido1`, `apellido2`) VALUES
+(1, 24, 'Angel', 'Rafael', 'Leon', 'Armas'),
+(2, 29772294, 'Nayivi', 'Yivian', 'Rodriguez', 'Griman'),
+(3, 25651454, 'Angel', 'Rafael', 'Leon', 'Armas');
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `estados`
 --
 
@@ -615,7 +653,7 @@ CREATE TABLE `estados` (
   `id_estado` int(11) NOT NULL,
   `estado` varchar(250) NOT NULL,
   `iso_3166` varchar(4) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Volcado de datos para la tabla `estados`
@@ -665,14 +703,7 @@ CREATE TABLE `familia` (
 --
 
 INSERT INTO `familia` (`id_familia`, `id_a`, `id_r`) VALUES
-(128, 12523580033, 12523580),
-(139, 27536109033, 12523580),
-(140, 27536109033, 12523580),
-(141, 12384512635, 21235812),
-(142, 12384512635, 21235812),
-(143, 45923784567, 45623984),
-(144, 45234523452, 73784576),
-(145, 70568908723, 46546879);
+(177, 134556451, 134556451);
 
 -- --------------------------------------------------------
 
@@ -684,7 +715,7 @@ CREATE TABLE `grado` (
   `id_grado` int(11) NOT NULL,
   `numero` varchar(20) NOT NULL,
   `grado` varchar(200) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `grado`
@@ -696,7 +727,8 @@ INSERT INTO `grado` (`id_grado`, `numero`, `grado`) VALUES
 (3, '3º', 'Tercer'),
 (4, '4º', 'Cuarto'),
 (5, '5º', 'Quinto'),
-(6, '6º', 'Sexto');
+(6, '6º', 'Sexto'),
+(7, 'Nuevo Ingreso', 'Especialista');
 
 -- --------------------------------------------------------
 
@@ -707,14 +739,27 @@ INSERT INTO `grado` (`id_grado`, `numero`, `grado`) VALUES
 CREATE TABLE `horarios` (
   `id` int(11) NOT NULL,
   `id_p` int(100) NOT NULL,
+  `id_dias` int(11) NOT NULL,
   `hora1` varchar(200) NOT NULL,
   `hora2` varchar(200) NOT NULL,
   `hora3` varchar(200) NOT NULL,
   `hora4` varchar(200) NOT NULL,
   `hora5` varchar(200) NOT NULL,
   `hora6` varchar(200) NOT NULL,
-  `hora7` varchar(200) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `hora7` varchar(200) NOT NULL,
+  `especial` enum('si','no') NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `horarios`
+--
+
+INSERT INTO `horarios` (`id`, `id_p`, `id_dias`, `hora1`, `hora2`, `hora3`, `hora4`, `hora5`, `hora6`, `hora7`, `especial`) VALUES
+(87, 2, 1, 'Primer Grado', 'HORA NO IMPARTIDA', 'HORA NO IMPARTIDA', 'Segundo Grado', 'HORA NO IMPARTIDA', 'HORA NO IMPARTIDA', 'HORA NO IMPARTIDA', 'si'),
+(88, 2, 2, 'Tercer Grado', 'HORA NO IMPARTIDA', 'HORA NO IMPARTIDA', 'Cuarto Grado', 'HORA NO IMPARTIDA', 'HORA NO IMPARTIDA', 'HORA NO IMPARTIDA', 'si'),
+(89, 2, 3, 'Quinto Grado', 'HORA NO IMPARTIDA', 'HORA NO IMPARTIDA', 'Sexto Grado', 'HORA NO IMPARTIDA', 'HORA NO IMPARTIDA', 'HORA NO IMPARTIDA', 'si'),
+(90, 2, 4, 'Primer Grado', 'HORA NO IMPARTIDA', 'Segundo Grado', 'HORA NO IMPARTIDA', 'Tercer Grado', 'HORA NO IMPARTIDA', 'Cuarto Grado', 'si'),
+(91, 2, 5, 'Quinto Grado', 'HORA NO IMPARTIDA', 'HORA NO IMPARTIDA', 'HORA NO IMPARTIDA', 'Sexto Grado', 'HORA NO IMPARTIDA', 'HORA NO IMPARTIDA', 'si');
 
 -- --------------------------------------------------------
 
@@ -729,19 +774,14 @@ CREATE TABLE `inscripcion` (
   `id_s` bigint(11) NOT NULL,
   `id_t` bigint(11) NOT NULL,
   `id_p` bigint(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `inscripcion`
 --
 
 INSERT INTO `inscripcion` (`id`, `id_a`, `id_r`, `id_s`, `id_t`, `id_p`) VALUES
-(101, 12523580033, 12523580, 12523580033, 12523580033, 12523580033),
-(112, 27536109033, 12523580, 27536109033, 27536109033, 27536109033),
-(114, 12384512635, 21235812, 12384512635, 12384512635, 12384512635),
-(116, 45923784567, 45623984, 45923784567, 45923784567, 45923784567),
-(117, 45234523452, 73784576, 45234523452, 45234523452, 45234523452),
-(118, 70568908723, 46546879, 70568908723, 70568908723, 70568908723);
+(138, 134556451, 134556451, 134556451, 134556451, 134556451);
 
 -- --------------------------------------------------------
 
@@ -751,21 +791,23 @@ INSERT INTO `inscripcion` (`id`, `id_a`, `id_r`, `id_s`, `id_t`, `id_p`) VALUES
 
 CREATE TABLE `materia` (
   `id` int(11) NOT NULL,
-  `materia` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `materia` varchar(20) NOT NULL,
+  `espe` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `materia`
 --
 
-INSERT INTO `materia` (`id`, `materia`) VALUES
-(1, 'Cultura'),
-(2, 'Ciencias Naturales'),
-(3, 'Ciencias Sociales'),
-(4, 'Deporte'),
-(5, 'Lenguaje'),
-(6, 'Matematicas'),
-(7, 'Manos a la Siembra');
+INSERT INTO `materia` (`id`, `materia`, `espe`) VALUES
+(1, 'Cultura', 'especial'),
+(2, 'Ciencias Naturales', ''),
+(3, 'Ciencias Sociales', ''),
+(4, 'Deporte', 'especial'),
+(5, 'Lenguaje', ''),
+(6, 'Matematicas', ''),
+(7, 'Manos a la Siembra', 'especial'),
+(8, ' ', ' ');
 
 -- --------------------------------------------------------
 
@@ -777,7 +819,7 @@ CREATE TABLE `municipios` (
   `id_municipio` int(11) NOT NULL,
   `id_estado` int(11) NOT NULL,
   `municipio` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Volcado de datos para la tabla `municipios`
@@ -1130,7 +1172,7 @@ CREATE TABLE `parroquias` (
   `id_parroquia` int(11) NOT NULL,
   `id_municipio` int(11) NOT NULL,
   `parroquia` varchar(250) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Volcado de datos para la tabla `parroquias`
@@ -2279,6 +2321,66 @@ INSERT INTO `parroquias` (`id_parroquia`, `id_municipio`, `parroquia`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `periodo`
+--
+
+CREATE TABLE `periodo` (
+  `id` int(100) NOT NULL,
+  `part1` int(4) NOT NULL,
+  `part2` int(4) NOT NULL,
+  `activo` enum('si','no') NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- Volcado de datos para la tabla `periodo`
+--
+
+INSERT INTO `periodo` (`id`, `part1`, `part2`, `activo`) VALUES
+(27, 2022, 2023, 'si');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `periodo_alumno`
+--
+
+CREATE TABLE `periodo_alumno` (
+  `id` int(11) NOT NULL,
+  `alumno` bigint(255) NOT NULL,
+  `periodo` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `periodo_alumno`
+--
+
+INSERT INTO `periodo_alumno` (`id`, `alumno`, `periodo`) VALUES
+(27, 134556451, '2022 / 2023');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `pregunta_seguridad`
+--
+
+CREATE TABLE `pregunta_seguridad` (
+  `id_users` int(11) NOT NULL,
+  `color_favorito` varchar(100) NOT NULL,
+  `mascota_fovorita` varchar(100) NOT NULL,
+  `hijo_favorito` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `pregunta_seguridad`
+--
+
+INSERT INTO `pregunta_seguridad` (`id_users`, `color_favorito`, `mascota_fovorita`, `hijo_favorito`) VALUES
+(29772294, 'Rosado', 'Perro', 'Josef'),
+(25, 'na', 'na', 'na');
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `procedencia`
 --
 
@@ -2287,19 +2389,14 @@ CREATE TABLE `procedencia` (
   `de_donde_proviene_p` text NOT NULL,
   `motivo_p` text NOT NULL,
   `direccion_p` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `procedencia`
 --
 
 INSERT INTO `procedencia` (`id_p`, `de_donde_proviene_p`, `motivo_p`, `direccion_p`) VALUES
-(12384512635, 'asdfasdfasdfas', 'dfasdfasdfas', 'dfasdfasdfwer324'),
-(12523580033, 'sdjflaskjdfljksfajsdfljashdlfkjhalkjshdfj', 'sdfasdfasdf', 'dfasdf3324ewqwerqwer'),
-(27536109033, 'sdjflaskjdfljksfajsdfljashdlfkjhalkjshdfj', 'sdfasdfasdf', 'dfasdf3324ewqwerqwer'),
-(45234523452, 'fhlksjdfhljkasdhjkfh', 'jfhasldjkfhalskdfjasjh', 'hflkjasdhf80f798asfa'),
-(45923784567, 'hlksjhasdjkhaj', 'gsdjghhfla', 'lkjhasdkljfh'),
-(70568908723, 'jhslfjhalskdjfhasjkldfh', 'ksdhfljkhasdfjlsjkh', 'ahdkjg79f76as');
+(134556451, 'Valencia', 'Mudanza de Trabajo', 'Valencia, Flor Amari');
 
 -- --------------------------------------------------------
 
@@ -2309,24 +2406,27 @@ INSERT INTO `procedencia` (`id_p`, `de_donde_proviene_p`, `motivo_p`, `direccion
 
 CREATE TABLE `profesor` (
   `id_p` int(11) NOT NULL,
-  `nombre_p` varchar(20) NOT NULL,
-  `apellido_P` varchar(20) NOT NULL,
-  `cedula_p` varchar(20) NOT NULL,
-  `direccion_p` varchar(20) NOT NULL,
-  `codigo_de_dependencia` varchar(20) NOT NULL,
-  `correo_p` varchar(20) NOT NULL,
-  `telefono_p` varchar(20) NOT NULL,
-  `year_de_servicio` varchar(20) NOT NULL,
-  `id_g` int(11) NOT NULL,
-  `id_s` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `nombre` varchar(20) NOT NULL,
+  `apellido` varchar(20) NOT NULL,
+  `cedula` varchar(20) NOT NULL,
+  `direccion` varchar(20) NOT NULL,
+  `codigo` varchar(20) NOT NULL,
+  `correo` varchar(20) NOT NULL,
+  `telefono` varchar(20) NOT NULL,
+  `ano` varchar(20) NOT NULL,
+  `id_grado` int(11) NOT NULL,
+  `id_seccion` int(11) NOT NULL,
+  `id_materia` int(11) NOT NULL,
+  `activo_p` enum('si','no') NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `profesor`
 --
 
-INSERT INTO `profesor` (`id_p`, `nombre_p`, `apellido_P`, `cedula_p`, `direccion_p`, `codigo_de_dependencia`, `correo_p`, `telefono_p`, `year_de_servicio`, `id_g`, `id_s`) VALUES
-(628183916, 'estefan', 'arar', '628183916', 'kfhasgdgk', '26hfawj2', 'kjafg@gmail.com', '4237176457', '65', 6, 1);
+INSERT INTO `profesor` (`id_p`, `nombre`, `apellido`, `cedula`, `direccion`, `codigo`, `correo`, `telefono`, `ano`, `id_grado`, `id_seccion`, `id_materia`, `activo_p`) VALUES
+(1, 'Andres', 'Peres', '16690234', 'Limon', 'AE-235DF', 'andresperez@gmail.co', '04242453708', '12', 1, 1, 8, 'si'),
+(2, 'Maria', 'Mendez', '17903406', 'La Coromoto', 'EA-456EF', 'maria23@gmail.com', '04145609076', '10', 7, 5, 1, 'si');
 
 -- --------------------------------------------------------
 
@@ -2337,23 +2437,24 @@ INSERT INTO `profesor` (`id_p`, `nombre_p`, `apellido_P`, `cedula_p`, `direccion
 CREATE TABLE `prosecucion` (
   `id_ficha` int(11) NOT NULL,
   `id_familia` bigint(11) NOT NULL,
-  `nota_ficha` varchar(200) NOT NULL,
+  `obs_ficha` varchar(200) NOT NULL,
   `plantel_ficha` varchar(200) NOT NULL,
-  `turno_ficha` varchar(200) NOT NULL,
   `promocion_ficha` int(11) NOT NULL,
   `seccion_ficha` int(11) NOT NULL,
   `doc_insc_ficha` varchar(2000) NOT NULL,
   `fecha_de_pro_ficha` date NOT NULL,
   `profesor_ficha` varchar(200) NOT NULL,
-  `cedula_profesor_ficha` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `cedula_profesor_ficha` int(11) NOT NULL,
+  `asis_ficha` varchar(200) NOT NULL,
+  `literal_ficha` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `prosecucion`
 --
 
-INSERT INTO `prosecucion` (`id_ficha`, `id_familia`, `nota_ficha`, `plantel_ficha`, `turno_ficha`, `promocion_ficha`, `seccion_ficha`, `doc_insc_ficha`, `fecha_de_pro_ficha`, `profesor_ficha`, `cedula_profesor_ficha`) VALUES
-(5, 139, 'erqwsfadsdf', 'asdfasdf', 'Mañana', 5, 4, 'asfasdfasdf', '2023-09-22', 'adfasdf', 452345);
+INSERT INTO `prosecucion` (`id_ficha`, `id_familia`, `obs_ficha`, `plantel_ficha`, `promocion_ficha`, `seccion_ficha`, `doc_insc_ficha`, `fecha_de_pro_ficha`, `profesor_ficha`, `cedula_profesor_ficha`, `asis_ficha`, `literal_ficha`) VALUES
+(1, 177, 'El alumno trbajo desentemente y entrego todas sus tareas', 'E.B.N.E Ciro Maldonado Zerpa', 2, 1, 'Entrego Todos Los Documentos', '2023-08-01', 'David Herrera', 22630420, '75%', 'A');
 
 -- --------------------------------------------------------
 
@@ -2369,25 +2470,34 @@ CREATE TABLE `representante` (
   `profesion_r` text NOT NULL,
   `parentesco_r` varchar(200) NOT NULL,
   `direccion_r` varchar(200) NOT NULL,
-  `direccion_trabajo_r` varchar(200) NOT NULL,
+  `direccion_trabajo_r` varchar(400) NOT NULL,
   `telefono_r` varchar(12) NOT NULL,
   `telefono_trabajo_r` varchar(12) NOT NULL,
   `vive_r` enum('si','no') NOT NULL,
   `telefono_opcional_r` varchar(12) NOT NULL,
   `tiene_opc` enum('si','no') NOT NULL,
   `correo_electronico_r` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `representante`
 --
 
 INSERT INTO `representante` (`id_r`, `nombre_r`, `apellido_r`, `cedula_r`, `profesion_r`, `parentesco_r`, `direccion_r`, `direccion_trabajo_r`, `telefono_r`, `telefono_trabajo_r`, `vive_r`, `telefono_opcional_r`, `tiene_opc`, `correo_electronico_r`) VALUES
-(12523580, 'Kenia Reveca', 'Armas Miranda', '12523580', 'docente', 'Madre', 'opfgsñadaliñsi´ñifñsdihñi', '', '04263321074', '34523452345', 'no', '(vacio)', 'si', 'mamon@gmail.com'),
-(21235812, 'Josedavid Josef', 'Pantojas', '21235812', 'gadfgadsg', 'Padre', 'sdfasdfasdfasdfasdf', '53eqwtwe2', '04263321074', '34523452345', 'no', '(vacio)', 'si', 'keniareveca@gmail.co'),
-(45623984, 'sfasjdgfkjgfakjgfasj', 'jflaskjghsllkjfhaskj', '45623984', 'fksgfasdhfdghfkafa', 'Madre', 'fafasdfasdfasdfasd34534trerwqr', 'trqwetyrywetriqywetr', '04263321074', '58342346', 'no', '(vacio)', 'si', 'dfasdfasdfasd@gmail.'),
-(46546879, 'sadfasdfasdf', 'Armas', '46546879', 'dfhlasdhfjkadfh', 'Otros', 'fafasdfasdfasdfasd34534trerwqr', 'ahoer83y5o238y', '5423452345', '3563456', 'no', '(vacio)', 'si', 'dfasdfasdfasd@gmail.'),
-(73784576, 'mario marlo', 'asdfasdfasdf', '73784576', 'shdlfhaslkjdfhjh', 'Madre', 'fjfafhlajhdflasj', 'jsdfljkahs5434', '5423452345', '4564547', 'no', '(vacio)', 'si', 'dfasdfasdfasd@gmail.');
+(134556451, 'Maritza', 'Mendez', '134556451', 'Administradora de Empresas', 'Madre', 'El Limon', 'La Barraca', '04243367898', '04245684241', 'si', '', 'no', 'maritza@gnail.com');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `respaldo`
+--
+
+CREATE TABLE `respaldo` (
+  `id` int(11) NOT NULL,
+  `user` int(11) NOT NULL,
+  `usuario_admin` varchar(300) NOT NULL,
+  `passwd_admin` varchar(300) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -2403,19 +2513,14 @@ CREATE TABLE `salud` (
   `tratamiento_M_s` varchar(200) NOT NULL,
   `condicion_fisica_s` varchar(200) NOT NULL,
   `atencion_especial_s` varchar(200) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `salud`
 --
 
 INSERT INTO `salud` (`id_s`, `tiene_s`, `alergia_s`, `dieta_s`, `tratamiento_M_s`, `condicion_fisica_s`, `atencion_especial_s`) VALUES
-(12384512635, 'no', '(vacio)', '(vacio)', '(vacio)', '(vacio)', '(vacio)'),
-(12523580033, 'no', '(vacio)', '(vacio)', '(vacio)', '(vacio)', '(vacio)'),
-(27536109033, 'no', '(vacio)', '(vacio)', '(vacio)', '(vacio)', '(vacio)'),
-(45234523452, 'no', '(vacio)', '(vacio)', '(vacio)', '(vacio)', '(vacio)'),
-(45923784567, 'no', '(vacio)', '(vacio)', '(vacio)', '(vacio)', '(vacio)'),
-(70568908723, 'no', '(vacio)', '(vacio)', '(vacio)', '(vacio)', '(vacio)');
+(134556451, 'no', '', '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -2425,8 +2530,8 @@ INSERT INTO `salud` (`id_s`, `tiene_s`, `alergia_s`, `dieta_s`, `tratamiento_M_s
 
 CREATE TABLE `seccion` (
   `id_seccion` int(11) NOT NULL,
-  `literal` enum('A','B','C','D') NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `literal` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `seccion`
@@ -2436,7 +2541,8 @@ INSERT INTO `seccion` (`id_seccion`, `literal`) VALUES
 (1, 'A'),
 (2, 'B'),
 (3, 'C'),
-(4, 'D');
+(4, 'D'),
+(5, 'Nuevo Ingreso');
 
 -- --------------------------------------------------------
 
@@ -2452,19 +2558,14 @@ CREATE TABLE `transporte` (
   `cedula_t` varchar(200) NOT NULL,
   `numero_de_placa_t` varchar(20) NOT NULL,
   `numero_telefonico_opcional_t` varchar(200) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `transporte`
 --
 
 INSERT INTO `transporte` (`id_t`, `tiene_t`, `nombre_t`, `telefono_t`, `cedula_t`, `numero_de_placa_t`, `numero_telefonico_opcional_t`) VALUES
-(12384512635, 'no', '(vacio)', '(vacio)', '(vacio)', '(vacio)', '(vacio)'),
-(12523580033, 'no', '(vacio)', '(vacio)', '(vacio)', '(vacio)', '(vacio)'),
-(27536109033, 'no', '(vacio)', '(vacio)', '(vacio)', '(vacio)', '(vacio)'),
-(45234523452, 'no', '(vacio)', '(vacio)', '(vacio)', '(vacio)', '(vacio)'),
-(45923784567, 'no', '(vacio)', '(vacio)', '(vacio)', '(vacio)', '(vacio)'),
-(70568908723, 'no', '(vacio)', '(vacio)', '(vacio)', '(vacio)', '(vacio)');
+(134556451, 'no', '', '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -2475,25 +2576,20 @@ INSERT INTO `transporte` (`id_t`, `tiene_t`, `nombre_t`, `telefono_t`, `cedula_t
 CREATE TABLE `users` (
   `id` int(100) NOT NULL,
   `usuario` varchar(20) NOT NULL,
+  `cedula` varchar(200) NOT NULL,
   `passwd` varchar(260) NOT NULL,
-  `nivel` enum('I','A') NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `nivel` enum('I','A') NOT NULL,
+  `activo` enum('si','no') NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `users`
 --
 
-INSERT INTO `users` (`id`, `usuario`, `passwd`, `nivel`) VALUES
-(24, 'Angel', '$2y$10$4HQ5OuYImjqIU6H1YacESe18ioQVCxmXCsUYrFctme6Zwpyzjpiq6', 'A'),
-(25, 'leon', '$2y$10$TaS/6bWcou8uAvDUQECox.IHijQR789cazWle116u6NXQnrRvTCiW', 'I'),
-(26, 'Angel', '$2y$10$4PwtT1yG7xZ40tYgcH6TmeM.ptEm1iEbNO8eVboHexMEgKLv0I8Kq', 'A'),
-(27, 'victor', '$2y$10$NQd9617AjgTrBDBtw91I7.Bo5aPDeXikCmZuDaX70NU1BRSyr066W', 'I'),
-(28, 'Angel12', '$2y$10$kq2.UmDzQ05ItnSUNqXBRu91EbFmLR2guonek6K2wC/udrlayTmEK', 'A'),
-(29, 'Angel12', '$2y$10$o9BXrsnTJrtLyXq21gfMsOFBWW9E2Ni.tSUQu3zVb4XLE1u52M4nG', 'A'),
-(30, 'Angel13', '$2y$10$3HY6ejrgfMESlJcUuXfXVe1oYWskkAPAVDJqK9jWPg5qGl5Dsy.gi', 'A'),
-(31, 'Angel2565', '$2y$10$YdktZoDYlLn3Y.cHCKDI/ewhBvNO78nqwN.MD/Go1D1kD0zSA8m0u', 'A'),
-(32, 'leon25', '$2y$10$iFqqlvSgmYQtxmUzjNYFF.4B.Y87fPaQpgX5Qb5rerJbDEbpyPh9i', 'I'),
-(33, 'Angel', '$2y$10$fjANifIdia9KTxor0KFTNuumInQWl3GW6KAF602og4yG/QHQ4fLWq', 'A');
+INSERT INTO `users` (`id`, `usuario`, `cedula`, `passwd`, `nivel`, `activo`) VALUES
+(24, 'Angel', '', '$2y$10$4HQ5OuYImjqIU6H1YacESe18ioQVCxmXCsUYrFctme6Zwpyzjpiq6', 'I', 'si'),
+(25, 'leon', '', '$2y$10$TaS/6bWcou8uAvDUQECox.IHijQR789cazWle116u6NXQnrRvTCiW', 'I', 'si'),
+(29772294, 'Nayivi', '29772294', '$2y$10$57zYEl.qmZWhAb858rqki.wY5FepW64uEby5ns6qDZwgsVSUJeyQW', 'A', 'si');
 
 --
 -- Índices para tablas volcadas
@@ -2526,6 +2622,18 @@ ALTER TABLE `ciudades`
   ADD KEY `id_estado` (`id_estado`);
 
 --
+-- Indices de la tabla `dia`
+--
+ALTER TABLE `dia`
+  ADD PRIMARY KEY (`id_dia`);
+
+--
+-- Indices de la tabla `directora`
+--
+ALTER TABLE `directora`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indices de la tabla `estados`
 --
 ALTER TABLE `estados`
@@ -2550,7 +2658,8 @@ ALTER TABLE `grado`
 --
 ALTER TABLE `horarios`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `id_p` (`id_p`);
+  ADD KEY `id_p` (`id_p`),
+  ADD KEY `id_dias` (`id_dias`);
 
 --
 -- Indices de la tabla `inscripcion`
@@ -2584,6 +2693,25 @@ ALTER TABLE `parroquias`
   ADD KEY `id_municipio` (`id_municipio`);
 
 --
+-- Indices de la tabla `periodo`
+--
+ALTER TABLE `periodo`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `periodo_alumno`
+--
+ALTER TABLE `periodo_alumno`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `alumno` (`alumno`);
+
+--
+-- Indices de la tabla `pregunta_seguridad`
+--
+ALTER TABLE `pregunta_seguridad`
+  ADD KEY `id_users` (`id_users`);
+
+--
 -- Indices de la tabla `procedencia`
 --
 ALTER TABLE `procedencia`
@@ -2594,8 +2722,9 @@ ALTER TABLE `procedencia`
 --
 ALTER TABLE `profesor`
   ADD PRIMARY KEY (`id_p`),
-  ADD KEY `id_g` (`id_g`),
-  ADD KEY `id_s` (`id_s`);
+  ADD KEY `id_g` (`id_grado`),
+  ADD KEY `id_s` (`id_seccion`),
+  ADD KEY `materia` (`id_materia`);
 
 --
 -- Indices de la tabla `prosecucion`
@@ -2644,13 +2773,25 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT de la tabla `auditoria`
 --
 ALTER TABLE `auditoria`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=139;
 
 --
 -- AUTO_INCREMENT de la tabla `ciudades`
 --
 ALTER TABLE `ciudades`
   MODIFY `id_ciudad` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=523;
+
+--
+-- AUTO_INCREMENT de la tabla `dia`
+--
+ALTER TABLE `dia`
+  MODIFY `id_dia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT de la tabla `directora`
+--
+ALTER TABLE `directora`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `estados`
@@ -2662,25 +2803,25 @@ ALTER TABLE `estados`
 -- AUTO_INCREMENT de la tabla `familia`
 --
 ALTER TABLE `familia`
-  MODIFY `id_familia` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=146;
+  MODIFY `id_familia` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=178;
 
 --
 -- AUTO_INCREMENT de la tabla `grado`
 --
 ALTER TABLE `grado`
-  MODIFY `id_grado` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_grado` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `horarios`
 --
 ALTER TABLE `horarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=92;
 
 --
 -- AUTO_INCREMENT de la tabla `inscripcion`
 --
 ALTER TABLE `inscripcion`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=119;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=139;
 
 --
 -- AUTO_INCREMENT de la tabla `municipios`
@@ -2695,22 +2836,34 @@ ALTER TABLE `parroquias`
   MODIFY `id_parroquia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1139;
 
 --
+-- AUTO_INCREMENT de la tabla `periodo`
+--
+ALTER TABLE `periodo`
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+
+--
+-- AUTO_INCREMENT de la tabla `periodo_alumno`
+--
+ALTER TABLE `periodo_alumno`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+
+--
 -- AUTO_INCREMENT de la tabla `prosecucion`
 --
 ALTER TABLE `prosecucion`
-  MODIFY `id_ficha` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_ficha` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT de la tabla `seccion`
 --
 ALTER TABLE `seccion`
-  MODIFY `id_seccion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_seccion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29772295;
 
 --
 -- Restricciones para tablas volcadas
@@ -2744,23 +2897,23 @@ ALTER TABLE `ciudades`
 --
 ALTER TABLE `familia`
   ADD CONSTRAINT `familia_ibfk_1` FOREIGN KEY (`id_r`) REFERENCES `representante` (`id_r`),
-  ADD CONSTRAINT `familia_ibfk_2` FOREIGN KEY (`id_a`) REFERENCES `alumno` (`id_a`);
+  ADD CONSTRAINT `familia_ibfk_2` FOREIGN KEY (`id_a`) REFERENCES `alumno` (`id_a`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `horarios`
 --
 ALTER TABLE `horarios`
-  ADD CONSTRAINT `horarios_ibfk_1` FOREIGN KEY (`id_p`) REFERENCES `profesor` (`id_p`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `horarios_ibfk_1` FOREIGN KEY (`id_p`) REFERENCES `profesor` (`id_p`) ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `inscripcion`
 --
 ALTER TABLE `inscripcion`
-  ADD CONSTRAINT `inscripcion_ibfk_1` FOREIGN KEY (`id_a`) REFERENCES `alumno` (`id_a`),
-  ADD CONSTRAINT `inscripcion_ibfk_2` FOREIGN KEY (`id_r`) REFERENCES `representante` (`id_r`),
-  ADD CONSTRAINT `inscripcion_ibfk_3` FOREIGN KEY (`id_s`) REFERENCES `salud` (`id_s`),
-  ADD CONSTRAINT `inscripcion_ibfk_4` FOREIGN KEY (`id_t`) REFERENCES `transporte` (`id_t`),
-  ADD CONSTRAINT `inscripcion_ibfk_5` FOREIGN KEY (`id_p`) REFERENCES `procedencia` (`id_p`);
+  ADD CONSTRAINT `inscripcion_ibfk_1` FOREIGN KEY (`id_a`) REFERENCES `alumno` (`id_a`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `inscripcion_ibfk_2` FOREIGN KEY (`id_r`) REFERENCES `representante` (`id_r`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `inscripcion_ibfk_3` FOREIGN KEY (`id_s`) REFERENCES `salud` (`id_s`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `inscripcion_ibfk_4` FOREIGN KEY (`id_t`) REFERENCES `transporte` (`id_t`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `inscripcion_ibfk_5` FOREIGN KEY (`id_p`) REFERENCES `procedencia` (`id_p`) ON DELETE CASCADE;
 
 --
 -- Filtros para la tabla `municipios`
@@ -2775,17 +2928,30 @@ ALTER TABLE `parroquias`
   ADD CONSTRAINT `parroquias_ibfk_1` FOREIGN KEY (`id_municipio`) REFERENCES `municipios` (`id_municipio`);
 
 --
+-- Filtros para la tabla `periodo_alumno`
+--
+ALTER TABLE `periodo_alumno`
+  ADD CONSTRAINT `periodo_alumno_ibfk_1` FOREIGN KEY (`alumno`) REFERENCES `alumno` (`id_a`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `pregunta_seguridad`
+--
+ALTER TABLE `pregunta_seguridad`
+  ADD CONSTRAINT `pregunta_seguridad_ibfk_1` FOREIGN KEY (`id_users`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
 -- Filtros para la tabla `procedencia`
 --
 ALTER TABLE `procedencia`
-  ADD CONSTRAINT `procedencia_ibfk_1` FOREIGN KEY (`id_p`) REFERENCES `alumno` (`id_a`);
+  ADD CONSTRAINT `procedencia_ibfk_1` FOREIGN KEY (`id_p`) REFERENCES `alumno` (`id_a`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `profesor`
 --
 ALTER TABLE `profesor`
-  ADD CONSTRAINT `profesor_ibfk_1` FOREIGN KEY (`id_g`) REFERENCES `grado` (`id_grado`),
-  ADD CONSTRAINT `profesor_ibfk_2` FOREIGN KEY (`id_s`) REFERENCES `seccion` (`id_seccion`);
+  ADD CONSTRAINT `profesor_ibfk_1` FOREIGN KEY (`id_grado`) REFERENCES `grado` (`id_grado`),
+  ADD CONSTRAINT `profesor_ibfk_2` FOREIGN KEY (`id_seccion`) REFERENCES `seccion` (`id_seccion`),
+  ADD CONSTRAINT `profesor_ibfk_3` FOREIGN KEY (`id_materia`) REFERENCES `materia` (`id`);
 
 --
 -- Filtros para la tabla `prosecucion`
@@ -2793,19 +2959,19 @@ ALTER TABLE `profesor`
 ALTER TABLE `prosecucion`
   ADD CONSTRAINT `prosecucion_ibfk_3` FOREIGN KEY (`seccion_ficha`) REFERENCES `seccion` (`id_seccion`),
   ADD CONSTRAINT `prosecucion_ibfk_4` FOREIGN KEY (`promocion_ficha`) REFERENCES `grado` (`id_grado`),
-  ADD CONSTRAINT `prosecucion_ibfk_5` FOREIGN KEY (`id_familia`) REFERENCES `familia` (`id_familia`);
+  ADD CONSTRAINT `prosecucion_ibfk_5` FOREIGN KEY (`id_familia`) REFERENCES `familia` (`id_familia`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `salud`
 --
 ALTER TABLE `salud`
-  ADD CONSTRAINT `salud_ibfk_1` FOREIGN KEY (`id_s`) REFERENCES `alumno` (`id_a`);
+  ADD CONSTRAINT `salud_ibfk_1` FOREIGN KEY (`id_s`) REFERENCES `alumno` (`id_a`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `transporte`
 --
 ALTER TABLE `transporte`
-  ADD CONSTRAINT `transporte_ibfk_1` FOREIGN KEY (`id_t`) REFERENCES `alumno` (`id_a`);
+  ADD CONSTRAINT `transporte_ibfk_1` FOREIGN KEY (`id_t`) REFERENCES `alumno` (`id_a`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -23,6 +23,7 @@ require_once ("basedata2.php");
 
                 $_SESSION['usuario'] = $result["usuario"];
                 $_SESSION['nivel'] = $result["nivel"];
+                
                 return json_encode(array("status" => "success", "userId" => $result["id"],"user" => $result["usuario"],"nivel" => $result["nivel"]));
               
             } else {

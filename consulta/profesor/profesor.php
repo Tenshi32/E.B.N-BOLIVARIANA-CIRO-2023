@@ -62,7 +62,7 @@ if (!isset($_POST['buscar'])) {
 
               <div class="col">
                 <label class="form-label">
-                  <span>Introduzca un dato :</span>
+                  <span>Introduzca la cedula o el nombre o el apellido del profesor:  :</span>
                     <input type="text" class="form-control" id="buscar" name="buscar" value="<?php echo $_POST['buscar']; ?>">
                   </label>
                   <button type="text" class="btn btn-primary">Buscar <span class="fa fa-search"></span></button>

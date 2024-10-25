@@ -4,7 +4,25 @@
 
     date_default_timezone_set("America/Caracas");
 
+    require '../src/basedata2.php';
     require '../fpdf/fpdf.php';
+
+    $basedata = new baseData();
+    $basedata->conexion();
+
+    $sql = "SELECT * FROM users 
+    INNER JOIN directora ON directora.id_users = users.id 
+    WHERE nivel = 'A' AND activo = 'si'";
+    $stmt = $basedata->conexion()->prepare($sql);
+    $stmt->execute();
+
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    $sql1 = "SELECT * FROM periodo WHERE activo = 'si'";
+    $stmt1 = $basedata->conexion()->prepare($sql1);
+    $stmt1->execute();
+
+    $result1 = $stmt1->fetch(PDO::FETCH_ASSOC);
 
     $datos = unserialize($_POST['datos']);
 
@@ -45,7 +63,7 @@
         $pdf->AddPage();
         $pdf->SetFont('Arial','B',10);
 
-        $pdf->MultiCell(190, 5, utf8_decode('   Quien suscribe Lic. ____________________________ CI: _____________________ Director(a) de la Escuela Basica Nacional Bolivariana "Ciro Maldonado Zerpa" hace constar que el (a) Estudiante '. $datos['nombre_a']. ' ' .$datos['apellido_a'] .' de la Escuela Basica en el '.$datos['grado'].' Grado Seccion "' .$datos['literal']. '", Año Escolar '.$datos['periodo_escolar_a'].'.'), 0, "L");
+        $pdf->MultiCell(190, 5, utf8_decode('   Quien suscribe Lic. '.$result['nombre1'].' '.$result['nombre2'].' '.$result['apellido1'].' '.$result['apellido2'].' CI: '. $result["id_users"] .' Director(a) de la Escuela Basica Nacional Bolivariana "Ciro Maldonado Zerpa" hace constar que el (a) Estudiante '. $datos['nombre_a']. ' ' .$datos['apellido_a'] .' de la Escuela Basica en el '.$datos['grado'].' Grado Seccion "' .$datos['literal']. '", Año Escolar '.$result1['part1'].' / '.$result1['part2'].'.'), 0, "L");
 
         $pdf->Ln(5);
 
@@ -54,7 +72,7 @@
         $pdf->Ln(10);
 
         $pdf->Cell(190, 6, 'Firma y sello de la Director(a) _________________', 0, 1, 'C');
-        $pdf->Cell(190, 6, 'Lic.'. $_SESSION['user'] .' Director(a)', 0, 0, 'C');
+        $pdf->Cell(190, 6, 'Lic.'.$result['nombre1'].' '.$result['apellido1'].' Director(a)', 0, 0, 'C');
 
         $pdf->Output('Constancia de Estudio '.$datos['nombre_a']. '-' .$datos['cedula_a'], 'D'); 
 
